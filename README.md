@@ -17,3 +17,6 @@ Its sole method is MediaDevices.getDisplayMedia()
  1. 地址为localhost:// 访问时
  2. 地址为https:// 时
  3. 为文件访问file:///
+
+## 预览地址
+https://xmmorz.github.io/screenCapture/
