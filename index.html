@@ -94,36 +94,33 @@
     // 开始录屏
     let captureStream
 
-    if (navigator.getDisplayMedia) {
-      captureStream = await navigator.getDisplayMedia({
-        video: true,
-        // audio: true,   not support
-        cursor: 'always'
-      })
-    } else if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
-      captureStream = await navigator.mediaDevices.getDisplayMedia({
-        video: true,
-        // audio: true,   not support
-        cursor: 'always'
-      })
-    } else {
-      var error = 'getDisplayMedia API are not supported in this browser.';
-      console.log('error', error);
-      alert(error);
+//     if (navigator.getUserMedia) {
+//       captureStream = await navigator.getDisplayMedia({
+//         video: true,
+//         // audio: true,   not support
+//         cursor: 'always'
+//       })
+//     } else if (navigator.getDisplayMedia && navigator.mediaDevices.getDisplayMedia) {
+//       captureStream = await navigator.mediaDevices.getDisplayMedia({
+//         video: true,
+//         // audio: true,   not support
+//         cursor: 'always'
+//       })
+//     } else {
+//       var error = 'getDisplayMedia API are not supported in this browser.';
+//       console.log('error', error);
+//       alert(error);
+//       return
+//     }
+
+    try {
+      var constraints = { audio: true, video: { width: 1280, height: 720 } };
+      captureStream = await navigator.mediaDevices.getUserMedia(constraints)
+    } catch (e) {
+      // 取消录屏或者报错
+      alert(e)
       return
     }
-
-    // try {
-    //   captureStream = await navigator.mediaDevices.getDisplayMedia({
-    //     video: true,
-    //     // audio: true,   not support
-    //     cursor: 'always'
-    //   })
-    // } catch (e) {
-    //   // 取消录屏或者报错
-    //   alert(e)
-    //   return
-    // }
 
     downloadBtn.disabled = true
     recordBtn.style = 'display: none'
